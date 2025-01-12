@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 const Hero = ({
-  title = "Find Your Winter Deal!",
+  title = "Winter Deals!",
   subtitle = "Search most popular brand sales, for winter sports equipment, get your fit here. Save your time and money!",
 }) => {
   return (
