@@ -1,8 +1,8 @@
 import {
   Disclosure,
   DisclosureButton,
-  // Menu,
-  // MenuButton,
+  Menu,
+  MenuButton,
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
@@ -92,7 +92,6 @@ const Navbar = () => {
               </svg>
             </button>
 
-            {/* Profile dropdown
             <Menu as="div" className="relative ml-3">
               <div>
                 <MenuButton className="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -114,7 +113,7 @@ const Navbar = () => {
                   </svg>
                 </MenuButton>
               </div>
-            </Menu> */}
+            </Menu>
           </div>
         </div>
       </div>
