@@ -1,7 +1,8 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import HomeCards from "./components/HomeCards";
-import Products from "./components/Products";
+import ProductListings from "./components/ProductListings";
+import ViewMoreProducts from "./components/ViewMoreProducts";
 
 const App = () => {
   return (
@@ -9,7 +10,8 @@ const App = () => {
       <Navbar />
       <Hero />
       <HomeCards />
-      <Products />
+      <ProductListings />
+      <ViewMoreProducts />
     </>
   );
 };
