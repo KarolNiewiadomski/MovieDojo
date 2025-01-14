@@ -5,13 +5,18 @@ import {
   MenuButton,
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Navbar = () => {
+  const linkClass = ({ isActive }) =>
+    isActive
+      ? "text-gray-300 bg-gray-900 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+      : "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium";
+
   return (
     <Disclosure as="nav" className="bg-gray-800 drop-shadow-2xl">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -40,15 +45,9 @@ const Navbar = () => {
             {/* stantard navbar */}
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
-                <Link
-                  to="/"
-                  className={classNames(
-                    "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "rounded-md px-3 py-2 text-sm font-medium"
-                  )}
-                >
+                <NavLink to="/" className={linkClass}>
                   Home
-                </Link>
+                </NavLink>
                 <a
                   to="#"
                   className={classNames(
