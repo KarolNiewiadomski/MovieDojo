@@ -7,10 +7,6 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 const Navbar = () => {
   const linkClass = ({ isActive }) =>
     isActive
@@ -39,7 +35,7 @@ const Navbar = () => {
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start text-3xl">
             <div className="flex shrink-0 items-center">
               <h1 className="relative font-extrabold rounded-full bg-gray-800 text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800">
-                Snow<span className="text-red-700 font-extrabold">Sale</span>
+                PopCorn<span className="text-black font-extrabold">Loop</span>
               </h1>
             </div>
             {/* stantard navbar */}
@@ -48,42 +44,14 @@ const Navbar = () => {
                 <NavLink to="/" className={linkClass}>
                   Home
                 </NavLink>
-                <a
-                  to="#"
-                  className={classNames(
-                    "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "rounded-md px-3 py-2 text-sm font-medium"
-                  )}
-                >
-                  Goggles
-                </a>
-                <a
-                  to="#"
-                  className={classNames(
-                    "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "rounded-md px-3 py-2 text-sm font-medium"
-                  )}
-                >
-                  Jackets
-                </a>
-                <a
-                  to="#"
-                  className={classNames(
-                    "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "rounded-md px-3 py-2 text-sm font-medium"
-                  )}
-                >
-                  Trousers
-                </a>
-                <a
-                  to="#"
-                  className={classNames(
-                    "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "rounded-md px-3 py-2 text-sm font-medium"
-                  )}
-                >
-                  Base Layer
-                </a>
+
+                <NavLink to="/Movies" className={linkClass}>
+                  Movies
+                </NavLink>
+
+                <NavLink to="/TV Shows" className={linkClass}>
+                  TV Shows
+                </NavLink>
               </div>
             </div>
           </div>
