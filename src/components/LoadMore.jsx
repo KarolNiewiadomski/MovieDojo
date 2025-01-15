@@ -1,9 +1,9 @@
 // eslint-disable-next-line react/prop-types
-const LoadMoreProducts = ({ onClick }) => {
+const LoadMore = ({ handleClick }) => {
   return (
     <section className="m-auto max-w-lg my-8 px-44">
       <button
-        onClick={onClick}
+        onClick={handleClick}
         className="block bg-black text-white text-center py-4 rounded-xl hover:bg-gray-700 px-6"
       >
         Load More
@@ -12,4 +12,4 @@ const LoadMoreProducts = ({ onClick }) => {
   );
 };
 
-export default LoadMoreProducts;
+export default LoadMore;

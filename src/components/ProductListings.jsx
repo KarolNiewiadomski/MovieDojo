@@ -1,5 +1,5 @@
 import { useState } from "react";
-import LoadMoreProducts from "./LoadMoreProducts";
+import LoadMore from "./LoadMore";
 
 const products = [
   {
@@ -146,10 +146,10 @@ const ProductListings = () => {
   const productList = products.slice(0, visibleCount);
 
   return (
-    <div className="bg-white">
+    <div>
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-          Current Products on Sale
+          Popular Movies
         </h2>
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
@@ -180,16 +180,44 @@ const ProductListings = () => {
                   href="#"
                   className="rounded-md bg-gray-800 px-2 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Add to wish list
+                  Add to WatchList
                 </a>
               </div>
             </div>
           ))}
+
+          {/* <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+  {movieList.map((movie) => (
+    <div key={movie.id} className="group relative bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+      <img
+        alt={movie.imageAlt}
+        src={movie.imageSrc}
+        className="aspect-square w-full object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
+      />
+      <div className="p-4">
+        <h3 className="text-lg font-bold text-white">
+          <a href={movie.href} className="hover:underline">
+            {movie.title}
+          </a>
+        </h3>
+        <p className="text-sm text-gray-400 mt-1">{movie.genres.join(", ")}</p>
+        <div className="flex items-center justify-between mt-2">
+          <span className="text-sm font-medium text-yellow-400">
+            ⭐ {movie.rating}
+          </span>
+          <button
+            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+          >
+            Watch Trailer
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
+</div> */}
         </div>
 
-        {visibleCount < products.length && (
-          <LoadMoreProducts onClick={loadMore} />
-        )}
+        {visibleCount < products.length && <LoadMore handleClick={loadMore} />}
       </div>
     </div>
   );
