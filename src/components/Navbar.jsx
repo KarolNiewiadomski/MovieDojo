@@ -35,7 +35,7 @@ const Navbar = () => {
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start text-3xl">
             <div className="flex shrink-0 items-center">
               <h1 className="relative font-extrabold rounded-full bg-gray-800 text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800">
-                PopCorn<span className="text-black font-extrabold">Loop</span>
+                Movie<span className="text-black font-extrabold">DOJO</span>
               </h1>
             </div>
             {/* stantard navbar */}

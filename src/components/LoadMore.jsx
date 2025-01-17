@@ -11,5 +11,4 @@ const LoadMore = ({ handleClick }) => {
     </section>
   );
 };
-
 export default LoadMore;
