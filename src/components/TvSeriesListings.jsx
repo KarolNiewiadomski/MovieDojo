@@ -3,13 +3,15 @@ import { useState, useEffect } from "react";
 import ProductListing from "./ProductListing";
 import LoadMore from "./LoadMore";
 import { API_KEY, API_URL } from "../api/Constant";
+import WatchList from "./WatchList"; // Import the WatchList component
 
-const MovieListings = () => {
+const TvSeriesListings = () => {
   const [TvSeries, setTvSeries] = useState([]);
   const [TopRatedTvSeries, setTopRatedTvSeries] = useState([]);
   const [RecommendedTvSeries, setRecommendedTvSeries] = useState([]);
   const [visibleCount, setVisibleCount] = useState(8);
   const [error, setError] = useState(null);
+  const [watchList, setWatchList] = useState([]); // State to store the watch list
 
   useEffect(() => {
     const options = {
@@ -45,6 +47,10 @@ const MovieListings = () => {
 
   const loadMore = () => setVisibleCount((prev) => prev + 8);
 
+  const handleAddToWatchList = (tvSeries) => {
+    setWatchList((prevList) => [...prevList, tvSeries]); // Add selected TV series to the watch list
+  };
+
   const SeriesGrid = ({ title, TvSeries }) => (
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
       <h2 className="text-2xl font-bold tracking-tight text-gray-900">
@@ -55,7 +61,11 @@ const MovieListings = () => {
       ) : (
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {TvSeries.slice(0, visibleCount).map((movie) => (
-            <ProductListing key={movie.id} movie={movie} />
+            <ProductListing
+              key={movie.id}
+              movie={movie}
+              onAddToWatchList={handleAddToWatchList} // Pass the function to add to watch list
+            />
           ))}
         </div>
       )}
@@ -88,8 +98,10 @@ const MovieListings = () => {
           </div>
         )
       )}
+      {/* Add a watch list section */}
+      <WatchList watchList={watchList} />
     </div>
   );
 };
 
-export default MovieListings;
+export default TvSeriesListings;

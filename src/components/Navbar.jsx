@@ -63,13 +63,13 @@ const Navbar = () => {
                   </div>
                 </div>
 
-                {/* Wishlist */}
+                {/* Watch List */}
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <NavLink
-                    to="/wishlist"
+                    to="/WatchList"
                     className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                   >
-                    <span className="sr-only">Wishlist</span>
+                    <span className="sr-only">Watch List</span>
                     <svg
                       className="w-8 h-8 text-gray-400 hover:text-white"
                       xmlns="http://www.w3.org/2000/svg"

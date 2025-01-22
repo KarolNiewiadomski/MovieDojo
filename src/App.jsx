@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import MoviePage from "./pages/MoviePage";
 import TvSeriesPage from "./pages/TvSeriesPage";
+import WatchList from "./pages/WatchListPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,7 +19,7 @@ const router = createBrowserRouter(
       <Route path="*" element={<NotFoundPage />} />
       <Route path="/Movies" element={<MoviePage />} />
       <Route path="/TV Shows" element={<TvSeriesPage />} />
-      {/* <Route index element={<WishList />} /> */}
+      <Route path="/WatchList" element={<WatchList />} />
     </Route>
   )
 );
