@@ -69,12 +69,25 @@ const MovieListings = () => {
 
   return (
     <div className="bg-white">
-      <SeriesGrid title="Trending TV Series" TvSeries={TvSeries} />
-      <SeriesGrid title="Top Rated TV Series" TvSeries={TopRatedTvSeries} />
-      <SeriesGrid
-        title="Recommended TV Series"
-        TvSeries={RecommendedTvSeries}
-      />
+      {[TvSeries, TopRatedTvSeries, RecommendedTvSeries].map(
+        (seriesSet, index) => (
+          <div
+            key={index}
+            className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
+          >
+            <SeriesGrid
+              title={
+                index === 0
+                  ? "Trending TV Series"
+                  : index === 1
+                  ? "Top Rated TV Series"
+                  : "Recommended TV Series"
+              }
+              TvSeries={seriesSet}
+            />
+          </div>
+        )
+      )}
     </div>
   );
 };

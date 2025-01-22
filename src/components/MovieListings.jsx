@@ -64,8 +64,17 @@ const MovieListings = () => {
 
   return (
     <div className="bg-white">
-      <MovieGrid title="Trending Movies" movies={movies} />
-      <MovieGrid title="Top Rated Movies" movies={TopRatedMovies} />
+      {[movies, TopRatedMovies].map((movieSet, index) => (
+        <div
+          key={index}
+          className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
+        >
+          <MovieGrid
+            title={index === 0 ? "Trending Movies" : "Top Rated Movies"}
+            movies={movieSet}
+          />
+        </div>
+      ))}
     </div>
   );
 };
