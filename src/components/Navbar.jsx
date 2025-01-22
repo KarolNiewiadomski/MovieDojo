@@ -6,6 +6,7 @@ import Modal from "./Modal";
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userEmail, setUserEmail] = useState(null); // State to hold the signed-in user's email
 
   const linkClass = ({ isActive }) =>
     isActive
@@ -76,22 +77,30 @@ const Navbar = () => {
 
               <Menu as="div" className="relative ml-3">
                 <div>
-                  <button
-                    onClick={openModal}
-                    className="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="sr-only">Sign In</span>
-                    <svg
-                      className="w-8 h-8 text-gray-400 hover:text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={2}
-                      stroke="currentColor"
+                  {userEmail ? (
+                    // Display the first letter of the user's email
+                    <div className="relative rounded-full bg-indigo-600 text-white text-center w-8 h-8 font-bold text-lg">
+                      {userEmail[0].toUpperCase()}
+                    </div>
+                  ) : (
+                    // Sign-in button
+                    <button
+                      onClick={openModal}
+                      className="relative rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     >
-                      <path d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                    </svg>
-                  </button>
+                      <span className="sr-only">Sign In</span>
+                      <svg
+                        className="w-8 h-8 text-gray-400 hover:text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={2}
+                        stroke="currentColor"
+                      >
+                        <path d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                      </svg>
+                    </button>
+                  )}
                 </div>
               </Menu>
             </div>
@@ -100,7 +109,12 @@ const Navbar = () => {
       </Disclosure>
 
       {/* Sign-In Modal */}
-      {isModalOpen && <Modal closeModal={closeModal} />}
+      {isModalOpen && (
+        <Modal
+          closeModal={closeModal}
+          onSignIn={(email) => setUserEmail(email)} // Update user email
+        />
+      )}
     </>
   );
 };

@@ -2,7 +2,7 @@
 import { FaXmark } from "react-icons/fa6";
 import { useState } from "react";
 
-export default function Modal({ closeModal }) {
+export default function Modal({ closeModal, onSignIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,6 +12,9 @@ export default function Modal({ closeModal }) {
       // Save user data to local storage
       localStorage.setItem("user", JSON.stringify({ email, password }));
       alert("Signed in successfully!");
+      if (onSignIn) {
+        onSignIn(email); // Pass the email back to the Navbar
+      }
       closeModal(); // Close the modal
     } else {
       alert("Please fill in all fields.");
