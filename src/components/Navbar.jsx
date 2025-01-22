@@ -1,4 +1,4 @@
-import { Disclosure, DisclosureButton, Menu } from "@headlessui/react";
+import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
@@ -19,93 +19,114 @@ const Navbar = () => {
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800 drop-shadow-2xl">
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div className="relative flex h-16 items-center justify-between">
-            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                <span className="absolute -inset-0.5" />
-                <span className="sr-only">Open main menu</span>
-                <Bars3Icon
-                  aria-hidden="true"
-                  className="block size-6 group-data-[open]:hidden"
-                />
-                <XMarkIcon
-                  aria-hidden="true"
-                  className="hidden size-6 group-data-[open]:block"
-                />
-              </DisclosureButton>
-            </div>
-            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start text-3xl">
-              <div className="flex shrink-0 items-center">
-                <h1 className="relative font-extrabold rounded-full bg-gray-800 text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800">
-                  Movie<span className="text-black font-extrabold">DOJO</span>
-                </h1>
-              </div>
-              <div className="hidden sm:ml-6 sm:block">
-                <div className="flex space-x-4">
-                  <NavLink to="/" className={linkClass}>
-                    Home
-                  </NavLink>
-                  <NavLink to="/Movies" className={linkClass}>
-                    Movies
-                  </NavLink>
-                  <NavLink to="/TV Shows" className={linkClass}>
-                    TV Shows
-                  </NavLink>
+        {({ open }) => (
+          <>
+            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+              <div className="relative flex h-16 items-center justify-between">
+                {/* Hamburger Button */}
+                <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                    <span className="sr-only">Open main menu</span>
+                    {open ? (
+                      <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                    ) : (
+                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                    )}
+                  </Disclosure.Button>
                 </div>
-              </div>
-            </div>
-            {/* Wishlist */}
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <NavLink
-                to="/wishlist"
-                className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-              >
-                <span className="sr-only">Wishlist</span>
-                <svg
-                  className="w-8 h-8 text-gray-400 hover:text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                >
-                  <path d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
-                  <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                </svg>
-              </NavLink>
 
-              <Menu as="div" className="relative ml-3">
-                <div>
-                  {userEmail ? (
-                    // Display the first letter of the user's email
-                    <div className="relative rounded-full bg-indigo-600 text-white text-center w-8 h-8 font-bold text-lg">
-                      {userEmail[0].toUpperCase()}
-                    </div>
-                  ) : (
-                    // Sign-in button
-                    <button
-                      onClick={openModal}
-                      className="relative rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                {/* Logo and Links */}
+                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start text-3xl">
+                  <div className="flex shrink-0 items-center">
+                    <NavLink
+                      to="/"
+                      className="relative font-extrabold rounded-full bg-gray-800 text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 hover:text-white"
                     >
-                      <span className="sr-only">Sign In</span>
-                      <svg
-                        className="w-8 h-8 text-gray-400 hover:text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={2}
-                        stroke="currentColor"
-                      >
-                        <path d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                      </svg>
-                    </button>
-                  )}
+                      Movie
+                      <span className="text-black font-extrabold">DOJO</span>
+                    </NavLink>
+                  </div>
+                  <div className="hidden sm:ml-6 sm:block">
+                    <div className="flex space-x-4">
+                      <NavLink to="/" className={linkClass}>
+                        Home
+                      </NavLink>
+                      <NavLink to="/Movies" className={linkClass}>
+                        Movies
+                      </NavLink>
+                      <NavLink to="/TV Shows" className={linkClass}>
+                        TV Shows
+                      </NavLink>
+                    </div>
+                  </div>
                 </div>
-              </Menu>
+
+                {/* Wishlist */}
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <NavLink
+                    to="/wishlist"
+                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  >
+                    <span className="sr-only">Wishlist</span>
+                    <svg
+                      className="w-8 h-8 text-gray-400 hover:text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2}
+                      stroke="currentColor"
+                    >
+                      <path d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
+                      <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                  </NavLink>
+
+                  <div className="relative ml-3">
+                    {userEmail ? (
+                      // Display the first letter of the user's email
+                      <div className="relative rounded-full bg-indigo-600 text-white text-center w-8 h-8 font-bold text-lg">
+                        {userEmail[0].toUpperCase()}
+                      </div>
+                    ) : (
+                      // Sign-in button
+                      <button
+                        onClick={openModal}
+                        className="relative rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      >
+                        <span className="sr-only">Sign In</span>
+                        <svg
+                          className="w-8 h-8 text-gray-400 hover:text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={2}
+                          stroke="currentColor"
+                        >
+                          <path d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+
+            {/* Mobile Menu */}
+            <Disclosure.Panel className="sm:hidden">
+              <div className="space-y-1 px-2 pb-3 pt-2">
+                <NavLink to="/" className={linkClass}>
+                  Home
+                </NavLink>
+                <NavLink to="/Movies" className={linkClass}>
+                  Movies
+                </NavLink>
+                <NavLink to="/TV Shows" className={linkClass}>
+                  TV Shows
+                </NavLink>
+              </div>
+            </Disclosure.Panel>
+          </>
+        )}
       </Disclosure>
 
       {/* Sign-In Modal */}
