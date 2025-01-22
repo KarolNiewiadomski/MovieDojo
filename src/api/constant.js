@@ -1,0 +1,3 @@
+export const API_KEY =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZDk5MjViODM5YzY1NWFmNjdkYmM4M2E5ZWRlM2E4ZSIsIm5iZiI6MTczNzExNzc2Mi41MTcsInN1YiI6IjY3OGE1MDQyZGJmZTUwYWEzZDFkMjBmZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._oWQGe8RqlAQgmjgi3l29XECs82HURcf8trR5Hoauq4";
+export const API_URL = "https://api.themoviedb.org/";

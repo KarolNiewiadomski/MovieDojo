@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 const Hero = ({
-  title = "Search trending movies and TV series",
-  subtitle = "Make your personalised Watch list of popular TV series and Movies.",
+  title = "TV Series",
+  subtitle = "Browse popular and top rated TV Series and add them to your WatchList.",
 }) => {
   return (
     <div className="relative isolate overflow-hidden bg-gray-950 py-24 sm:py-32 drop-shadow-md">

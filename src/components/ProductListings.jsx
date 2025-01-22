@@ -1,26 +1,37 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ProductListing from "./ProductListing";
 import LoadMore from "./LoadMore";
+import { API_KEY } from "../api/Constant";
+import { API_URL } from "../api/Constant";
 
 const ProductListings = () => {
   const [movies, setMovies] = useState([]);
   const [visibleCount, setVisibleCount] = useState(8);
-
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZDk5MjViODM5YzY1NWFmNjdkYmM4M2E5ZWRlM2E4ZSIsIm5iZiI6MTczNzExNzc2Mi41MTcsInN1YiI6IjY3OGE1MDQyZGJmZTUwYWEzZDFkMjBmZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._oWQGe8RqlAQgmjgi3l29XECs82HURcf8trR5Hoauq4`,
-    },
-  };
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("//api.themoviedb.org/3/trending/all/week?language=en-US", options)
-      .then((res) => res.json())
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+      },
+    };
+
+    fetch(`${API_URL}/3/trending/all/week?language=en-US`, options)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
         setMovies(data.results || []);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setError("Failed to load movies. Please try again later.");
+      });
   }, []);
 
   const loadMore = () => {
@@ -29,6 +40,10 @@ const ProductListings = () => {
 
   const visibleMovies = movies.slice(0, visibleCount);
 
+  if (error) {
+    return <div className="text-red-500 text-center">{error}</div>;
+  }
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -36,11 +51,15 @@ const ProductListings = () => {
           Currently Trending
         </h2>
 
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {visibleMovies.map((movie) => (
-            <ProductListing key={movie.id} movie={movie} />
-          ))}
-        </div>
+        {movies.length === 0 ? (
+          <div className="text-center text-gray-600">Loading movies...</div>
+        ) : (
+          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            {visibleMovies.map((movie) => (
+              <ProductListing key={movie.id} movie={movie} />
+            ))}
+          </div>
+        )}
         {visibleCount < movies.length && <LoadMore handleClick={loadMore} />}
       </div>
     </div>
