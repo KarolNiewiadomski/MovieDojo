@@ -37,13 +37,15 @@ const Navbar = () => {
 
                 {/* Logo and Links */}
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start text-3xl">
-                  <div className="flex shrink-0 items-center">
+                  <div className="flex shrink-0 items-center ">
                     <NavLink
                       to="/"
-                      className="relative font-extrabold rounded-full bg-gray-800 text-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 hover:text-white"
+                      className="relative font-extrabold rounded-full bg-gray-800 text-gray-300 hover:text-white"
                     >
                       Movie
-                      <span className="text-black font-extrabold">DOJO</span>
+                      <span className="text-black font-extrabold hover:text-gray">
+                        DOJO
+                      </span>
                     </NavLink>
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
