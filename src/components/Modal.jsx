@@ -1,7 +1,23 @@
 /* eslint-disable react/prop-types */
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaXmark } from "react-icons/fa6";
+import { useState } from "react";
 
 export default function Modal({ closeModal }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignIn = (e) => {
+    e.preventDefault(); // Prevent form submission
+    if (email && password) {
+      // Save user data to local storage
+      localStorage.setItem("user", JSON.stringify({ email, password }));
+      alert("Signed in successfully!");
+      closeModal(); // Close the modal
+    } else {
+      alert("Please fill in all fields.");
+    }
+  };
+
   return (
     <div
       className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50"
@@ -16,7 +32,7 @@ export default function Modal({ closeModal }) {
             onClick={closeModal}
             className="absolute right-0 text-black hover:text-black"
           >
-            <FontAwesomeIcon icon="fa-solid fa-xmark" />
+            <FaXmark />
           </button>
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
             Sign in to your account
@@ -24,7 +40,7 @@ export default function Modal({ closeModal }) {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={handleSignIn} className="space-y-6">
             <div>
               <label
                 htmlFor="email"
@@ -38,6 +54,8 @@ export default function Modal({ closeModal }) {
                   name="email"
                   type="email"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   autoComplete="email"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
@@ -59,6 +77,8 @@ export default function Modal({ closeModal }) {
                   name="password"
                   type="password"
                   required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   autoComplete="current-password"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
