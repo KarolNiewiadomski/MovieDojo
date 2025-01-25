@@ -11,8 +11,9 @@ const WatchList = () => {
   );
   const [draggedItemIndex, setDraggedItemIndex] = useState(null); //Start of allowing the items to be dragged
 
-  const handleDragStart = (index) => {
+  const handleDragStart = (index, event) => {
     setDraggedItemIndex(index);
+    event.dataTransfer.effectAllowed = "move"; // Set move effect
   };
 
   const handleDragOver = (index) => {
@@ -60,17 +61,22 @@ const WatchList = () => {
                 <div
                   key={movie.id}
                   draggable
-                  onDragStart={() => handleDragStart(index)}
+                  onDragStart={(e) => handleDragStart(index, e)}
                   onDragOver={(e) => {
                     e.preventDefault();
-                    handleDragOver(index);
+                    handleDragOver(index, e);
                   }}
                   onDragEnd={handleDragEnd}
                   className={`rounded-3xl border-2 border-gray-200 p-4 lg:p-8 grid grid-cols-12 gap-y-4 max-lg:max-w-lg max-lg:mx-auto transition-all duration-300 ${
                     draggedItemIndex === index
-                      ? "opacity-75 shadow-lg"
+                      ? "opacity-100 shadow-xl z-20 transform scale-110 border-4 border-blue-500"
                       : "hover:cursor-grab"
                   }`}
+                  style={{
+                    transform:
+                      draggedItemIndex === index ? "scale(1.1)" : "none",
+                    zIndex: draggedItemIndex === index ? 20 : 1,
+                  }}
                 >
                   <div className="col-span-12 lg:col-span-1 flex items-center justify-center">
                     <div
