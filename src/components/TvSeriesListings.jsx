@@ -1,17 +1,16 @@
-/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import ProductListing from "./ProductListing";
 import LoadMore from "./LoadMore";
 import { API_KEY, API_URL } from "../api/Constant";
-import WatchList from "./WatchList"; // Import the WatchList component
+import WatchList from "./WatchList"; // Import WatchList
 
-const TvSeriesListings = () => {
+const TvSeriesListing = () => {
   const [TvSeries, setTvSeries] = useState([]);
   const [TopRatedTvSeries, setTopRatedTvSeries] = useState([]);
   const [RecommendedTvSeries, setRecommendedTvSeries] = useState([]);
   const [visibleCount, setVisibleCount] = useState(8);
   const [error, setError] = useState(null);
-  const [watchList, setWatchList] = useState([]); // State to store the watch list
+  const [watchList, setWatchList] = useState([]); // State to hold watch list
 
   useEffect(() => {
     const options = {
@@ -47,8 +46,9 @@ const TvSeriesListings = () => {
 
   const loadMore = () => setVisibleCount((prev) => prev + 8);
 
+  // Function to add TV series to the watch list
   const handleAddToWatchList = (tvSeries) => {
-    setWatchList((prevList) => [...prevList, tvSeries]); // Add selected TV series to the watch list
+    setWatchList((prevList) => [...prevList, tvSeries]); // Add the TV series to the list
   };
 
   const SeriesGrid = ({ title, TvSeries }) => (
@@ -98,10 +98,9 @@ const TvSeriesListings = () => {
           </div>
         )
       )}
-      {/* Add a watch list section */}
-      <WatchList watchList={watchList} />
+      <WatchList watchList={watchList} /> {/* Display watch list */}
     </div>
   );
 };
 
-export default TvSeriesListings;
+export default TvSeriesListing;

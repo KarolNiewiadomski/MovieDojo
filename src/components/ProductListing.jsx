@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { FaStar } from "react-icons/fa";
 
-const ProductListing = ({ movie }) => {
+const ProductListing = ({ movie, onAddToWatchList }) => {
   return (
     <div className="group relative bg-gray-800 rounded-lg shadow-lg overflow-hidden">
       <div className="relative">
@@ -23,7 +23,11 @@ const ProductListing = ({ movie }) => {
             <FaStar className="inline text-lg mb-1 mr-2" />
             {movie.vote_average.toFixed(1)}
           </span>
-          <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">
+          {/* Add to WatchList button */}
+          <button
+            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+            onClick={() => onAddToWatchList(movie)} // Trigger the add to watch list action
+          >
             Add to WatchList
           </button>
         </div>
