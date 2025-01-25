@@ -5,20 +5,43 @@ import { useState } from "react";
 export default function Modal({ closeModal, onSignIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const validatePassword = (password) => {
+    const passwordRegex =
+      /^(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+    return passwordRegex.test(password);
+  };
+
+  const validateEmail = (email) => {
+    return email.includes("@");
+  };
 
   const handleSignIn = (e) => {
     e.preventDefault(); // Prevent form submission
-    if (email && password) {
-      // Save user data to local storage
-      localStorage.setItem("user", JSON.stringify({ email, password }));
-      alert("Signed in successfully!");
-      if (onSignIn) {
-        onSignIn(email); // Pass the email back to the Navbar
-      }
-      closeModal(); // Close the modal
-    } else {
-      alert("Please fill in all fields.");
+
+    if (!validateEmail(email)) {
+      setErrorMessage("Email must contain an '@' symbol.");
+      return;
     }
+
+    if (!validatePassword(password)) {
+      setErrorMessage(
+        "Password must be at least 8 characters long and contain at least one special character."
+      );
+      return;
+    }
+
+    // Clear error message
+    setErrorMessage("");
+
+    // Save user data to local storage
+    localStorage.setItem("user", JSON.stringify({ email, password }));
+    alert("Signed in successfully!");
+    if (onSignIn) {
+      onSignIn(email); // Pass the email back to the Navbar
+    }
+    closeModal(); // Close the modal
   };
 
   return (
@@ -43,6 +66,9 @@ export default function Modal({ closeModal, onSignIn }) {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          {errorMessage && (
+            <div className="mb-4 text-sm text-red-600">{errorMessage}</div>
+          )}
           <form onSubmit={handleSignIn} className="space-y-6">
             <div>
               <label
@@ -85,6 +111,10 @@ export default function Modal({ closeModal, onSignIn }) {
                   autoComplete="current-password"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
+                <p className="mt-1 text-xs text-gray-500">
+                  Password must be at least 8 characters long and contain at
+                  least one special character.
+                </p>
               </div>
             </div>
 

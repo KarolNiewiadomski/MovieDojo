@@ -1,8 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import ProductListing from "./ProductListing";
 import LoadMore from "./LoadMore";
 import { API_KEY, API_URL } from "../api/Constant";
-import WatchList from "./WatchList"; // Import WatchList
 
 const TvSeriesListing = () => {
   const [TvSeries, setTvSeries] = useState([]);
@@ -10,7 +10,6 @@ const TvSeriesListing = () => {
   const [RecommendedTvSeries, setRecommendedTvSeries] = useState([]);
   const [visibleCount, setVisibleCount] = useState(8);
   const [error, setError] = useState(null);
-  const [watchList, setWatchList] = useState([]); // State to hold watch list
 
   useEffect(() => {
     const options = {
@@ -46,26 +45,17 @@ const TvSeriesListing = () => {
 
   const loadMore = () => setVisibleCount((prev) => prev + 8);
 
-  // Function to add TV series to the watch list
-  const handleAddToWatchList = (tvSeries) => {
-    setWatchList((prevList) => [...prevList, tvSeries]); // Add the TV series to the list
-  };
-
-  const SeriesGrid = ({ title, TvSeries }) => (
+  const SeriesGrid = ({ name, TvSeries }) => (
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
       <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-        {title}
+        {name}
       </h2>
       {TvSeries.length === 0 ? (
         <div className="text-center text-gray-600">Loading TvSeries...</div>
       ) : (
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {TvSeries.slice(0, visibleCount).map((movie) => (
-            <ProductListing
-              key={movie.id}
-              movie={movie}
-              onAddToWatchList={handleAddToWatchList} // Pass the function to add to watch list
-            />
+            <ProductListing key={movie.id} movie={movie} />
           ))}
         </div>
       )}
@@ -80,16 +70,13 @@ const TvSeriesListing = () => {
   return (
     <div className="bg-white">
       {[TvSeries, TopRatedTvSeries, RecommendedTvSeries].map(
-        (seriesSet, index) => (
-          <div
-            key={index}
-            className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
-          >
+        (seriesSet, id) => (
+          <div key={id} className={id % 2 === 0 ? "bg-white" : "bg-gray-100"}>
             <SeriesGrid
-              title={
-                index === 0
+              name={
+                id === 0
                   ? "Trending TV Series"
-                  : index === 1
+                  : id === 1
                   ? "Top Rated TV Series"
                   : "Recommended TV Series"
               }
@@ -98,7 +85,6 @@ const TvSeriesListing = () => {
           </div>
         )
       )}
-      <WatchList watchList={watchList} /> {/* Display watch list */}
     </div>
   );
 };

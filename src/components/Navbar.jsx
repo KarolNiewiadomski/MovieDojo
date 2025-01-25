@@ -3,10 +3,12 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import Modal from "./Modal";
+import { useWatchList } from "./UseWatchList"; // Import custom hook for watchlist
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userEmail, setUserEmail] = useState(null); // State to hold the signed-in user's email
+  const { watchList } = useWatchList(); // Use the hook to access the watchlist
 
   const linkClass = ({ isActive }) =>
     isActive
@@ -81,6 +83,10 @@ const Navbar = () => {
                       <path d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
                       <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     </svg>
+                    {/* Watchlist count circle */}
+                    {watchList.length > 0 && (
+                      <div className="absolute bottom-0 right-0 w-3 h-3 bg-red-500 rounded-full"></div>
+                    )}
                   </NavLink>
 
                   <div className="relative ml-3">

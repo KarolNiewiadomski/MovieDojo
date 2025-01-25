@@ -11,6 +11,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import MoviePage from "./pages/MoviePage";
 import TvSeriesPage from "./pages/TvSeriesPage";
 import WatchList from "./pages/WatchListPage";
+import { WatchListProvider } from "./components/WatchListProvider";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,7 +26,11 @@ const router = createBrowserRouter(
 );
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <WatchListProvider>
+      <RouterProvider router={router} />
+    </WatchListProvider>
+  );
 };
 
 export default App;
