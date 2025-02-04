@@ -77,10 +77,10 @@ const ProductListing = ({ movie }) => {
 
       {/* Movie Info */}
       <div className="p-4 flex-grow flex flex-col justify-between">
-        <h3 className="text-lg font-bold text-white">
+        <h3 className="text-base font-bold text-white">
           {movie.title || movie.name || "Untitled"}
         </h3>
-        <div className="flex items-center justify-between mt-auto">
+        <div className="flex items-center justify-between mt-auto pt-2.5">
           <span className="text-sm font-medium text-yellow-400">
             <FaStar className="inline text-lg mb-1 mr-2" />
             {movie.vote_average ? movie.vote_average.toFixed(1) : "N/A"}
