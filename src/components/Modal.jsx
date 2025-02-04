@@ -39,7 +39,7 @@ export default function Modal({ closeModal, onSignIn }) {
     localStorage.setItem("user", JSON.stringify({ email, password }));
     alert("Signed in successfully!");
     if (onSignIn) {
-      onSignIn(email); // Pass the email back to the Navbar
+      onSignIn(email); // Pass the email inital back to the Navbar
     }
     closeModal(); // Close the modal
   };
@@ -47,7 +47,7 @@ export default function Modal({ closeModal, onSignIn }) {
   return (
     <div
       className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50"
-      onClick={closeModal} // Close modal when clicking on the backdrop
+      onClick={closeModal} // Modal closes when clicking away
     >
       <div
         className="flex min-h-64 flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white rounded-lg shadow-lg sm:max-w-sm sm:w-full"
