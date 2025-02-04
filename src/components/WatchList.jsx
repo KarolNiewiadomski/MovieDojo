@@ -11,6 +11,9 @@ const WatchList = () => {
   );
   const [draggedItemIndex, setDraggedItemIndex] = useState(null); //Start of allowing the items to be dragged
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMovieId, setSelectedMovieId] = useState(null);
+
   const handleDragStart = (index, event) => {
     setDraggedItemIndex(index);
     event.dataTransfer.effectAllowed = "move"; // Set move effect
@@ -38,10 +41,18 @@ const WatchList = () => {
     );
   };
 
-  const removeFromWatchList = (id) => {
-    setOrderedList((prevList) => prevList.filter((movie) => movie.id !== id));
+  const confirmRemoveFromWatchList = (id) => {
+    setSelectedMovieId(id);
+    setIsModalOpen(true);
+  };
 
-    removeFromWatchListFromHook(id);
+  const removeFromWatchList = () => {
+    setOrderedList((prevList) =>
+      prevList.filter((movie) => movie.id !== selectedMovieId)
+    );
+    removeFromWatchListFromHook(selectedMovieId);
+    setIsModalOpen(false);
+    setSelectedMovieId(null);
   };
 
   return (
@@ -113,7 +124,7 @@ const WatchList = () => {
                       </h5>
                       <button
                         className="rounded-full group flex items-center justify-center focus-within:outline-red-500"
-                        onClick={() => removeFromWatchList(movie.id)}
+                        onClick={() => confirmRemoveFromWatchList(movie.id)}
                       >
                         <svg
                           width="34"
@@ -152,6 +163,31 @@ const WatchList = () => {
           </div>
         )}
       </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <p className="text-lg mb-4">
+              Are you sure you want to delete this item?
+            </p>
+            <div className="flex justify-center gap-4">
+              <button
+                className="px-4 py-2 bg-red-500 text-white rounded-lg"
+                onClick={removeFromWatchList}
+              >
+                Yes
+              </button>
+              <button
+                className="px-4 py-2 bg-gray-300 rounded-lg"
+                onClick={() => setIsModalOpen(false)}
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

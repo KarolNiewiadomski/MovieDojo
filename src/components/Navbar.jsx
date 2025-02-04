@@ -8,7 +8,7 @@ import { useWatchList } from "./UseWatchList"; // Import custom hook for watchli
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userEmail, setUserEmail] = useState(null); // State to hold the signed-in user's email
-  const { watchList } = useWatchList(); // Use the hook to access the watchlist
+  const { watchList } = useWatchList(); // hook to access the watchlist
 
   const linkClass = ({ isActive }) =>
     isActive
@@ -69,7 +69,7 @@ const Navbar = () => {
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <NavLink
                     to="/WatchList"
-                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none "
                   >
                     <span className="sr-only">Watch List</span>
                     <svg
@@ -99,7 +99,7 @@ const Navbar = () => {
                       // Sign-in button
                       <button
                         onClick={openModal}
-                        className="relative rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        className="relative rounded-full text-gray-400 hover:text-white focus:outline-none"
                       >
                         <span className="sr-only">Sign In</span>
                         <svg
