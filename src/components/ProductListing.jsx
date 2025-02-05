@@ -1,42 +1,23 @@
 /* eslint-disable react/prop-types */
 import { FaStar } from "react-icons/fa";
 import { useWatchList } from "./UseWatchList";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const ProductListing = ({ movie }) => {
   const { addToWatchList } = useWatchList();
-  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
-  useEffect(() => {
-    const checkUser = () => {
-      const user = localStorage.getItem("user");
-      setIsUserSignedIn(!!user);
-    };
-    checkUser();
-    window.addEventListener("storage", checkUser);
-    return () => window.removeEventListener("storage", checkUser);
-  }, []);
-
   const handleAddToWatchList = () => {
-    if (!isUserSignedIn) {
-      console.log("You must sign in to add movies to your watchlist.");
-    } else {
-      addToWatchList(movie);
-    }
+    addToWatchList(movie);
   };
 
   const renderButton = () => (
     <button
-      className={`flex items-center justify-between rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm ${
-        isUserSignedIn
-          ? "bg-indigo-600 hover:bg-indigo-500"
-          : "bg-gray-600 cursor-not-allowed opacity-50"
-      }`}
+      className="flex items-center justify-between rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm bg-indigo-600 hover:bg-indigo-500"
       onClick={handleAddToWatchList}
     >
-      {isUserSignedIn ? "Add to WatchList" : "Sign in to Add to WatchList"}
+      Add to WatchList
     </button>
   );
 
