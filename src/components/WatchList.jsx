@@ -59,11 +59,11 @@ const WatchList = () => {
     <section className="py-24 relative">
       <div className="w-full max-w-7xl px-4 md:px-5 lg:px-6 mx-auto">
         <h2 className="title font-manrope font-bold text-4xl leading-10 mb-8 text-center text-black">
-          Your WatchList
+          Your Watchlist
         </h2>
 
         {orderedList.length === 0 ? (
-          <p className="text-center text-gray-500">Your watchlist is empty.</p>
+          <p className="text-center text-gray-500">Your Watchlist is empty.</p>
         ) : (
           <div className="space-y-4">
             {orderedList
