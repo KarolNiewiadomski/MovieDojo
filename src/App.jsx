@@ -12,6 +12,7 @@ import MoviePage from "./pages/MoviePage";
 import TvSeriesPage from "./pages/TvSeriesPage";
 import WatchList from "./pages/WatchListPage";
 import { WatchListProvider } from "./components/WatchListProvider";
+import { Helmet } from "react-helmet";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +29,12 @@ const router = createBrowserRouter(
 const App = () => {
   return (
     <WatchListProvider>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Movie Dojo</title>
+        <link rel="Movie Dojo" href="https://movie-dojo.netlify.app/" />
+        <meta name="Movie Dojo" content="Final Project" />
+      </Helmet>
       <RouterProvider router={router} />
     </WatchListProvider>
   );
