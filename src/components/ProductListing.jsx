@@ -7,28 +7,19 @@ import { motion } from "framer-motion";
 const ProductListing = ({ movie }) => {
   const { addToWatchList } = useWatchList();
   const [isHovered, setIsHovered] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   const handleAddToWatchList = () => {
     addToWatchList(movie);
-    setIsAnimating(true);
-
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 1000);
+    alert("Succesfully added to watchlist");
   };
 
   const renderButton = () => (
-    <motion.button
-      className="flex items-center justify-between rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm"
+    <button
+      className="flex items-center justify-between rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm bg-indigo-600 hover:bg-indigo-500"
       onClick={handleAddToWatchList}
-      animate={{
-        backgroundColor: isAnimating ? "#22c55e" : "#4f46e5",
-      }}
-      transition={{ duration: 1 }}
     >
       Add to WatchList
-    </motion.button>
+    </button>
   );
 
   if (!movie) {
