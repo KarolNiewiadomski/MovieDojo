@@ -18,7 +18,7 @@ const ProductListing = ({ movie }) => {
       className="flex items-center justify-between rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm bg-indigo-600 hover:bg-indigo-500"
       onClick={handleAddToWatchList}
     >
-      Add to WatchList
+      Add to Watchlist
     </button>
   );
 
