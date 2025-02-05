@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import ProductListing from "./ProductListing";
 import LoadMore from "./LoadMore";
-import { API_KEY } from "../api/Constant";
-import { API_URL } from "../api/Constant";
+import { API_KEY } from "../api/constant";
+import { API_URL } from "../api/constant";
 
 const ProductListings = () => {
   const [movies, setMovies] = useState([]);
