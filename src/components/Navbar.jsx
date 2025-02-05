@@ -55,10 +55,10 @@ const Navbar = () => {
                       <NavLink to="/" className={linkClass}>
                         Home
                       </NavLink>
-                      <NavLink to="/Movies" className={linkClass}>
+                      <NavLink to="/movies" className={linkClass}>
                         Movies
                       </NavLink>
-                      <NavLink to="/TV Shows" className={linkClass}>
+                      <NavLink to="/tv-shows" className={linkClass}>
                         TV Shows
                       </NavLink>
                     </div>

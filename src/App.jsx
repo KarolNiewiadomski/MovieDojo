@@ -19,9 +19,9 @@ const router = createBrowserRouter(
     <Route path="/" element={<MainLayout />}>
       <Route index element={<HomePage />} />
       <Route path="*" element={<NotFoundPage />} />
-      <Route path="/Movies" element={<MoviePage />} />
-      <Route path="/TV-Shows" element={<TvSeriesPage />} />
-      <Route path="/WatchList" element={<WatchList />} />
+      <Route path="/movies" element={<MoviePage />} />
+      <Route path="/tv-shows" element={<TvSeriesPage />} />
+      <Route path="/watchlist" element={<WatchList />} />
     </Route>
   )
 );
