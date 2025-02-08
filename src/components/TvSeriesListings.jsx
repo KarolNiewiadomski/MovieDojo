@@ -11,6 +11,7 @@ const TvSeriesListing = () => {
   const [visibleCount, setVisibleCount] = useState(8);
   const [error, setError] = useState(null);
 
+  // Fetch TV series data when component mounts
   useEffect(() => {
     const options = {
       method: "GET",
@@ -20,18 +21,20 @@ const TvSeriesListing = () => {
       },
     };
 
+    // Fetchs data from API and update state
     const fetchTvSeries = async (url, setState) => {
       try {
         const res = await fetch(url, options);
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         const data = await res.json();
-        setState(data.results || []);
+        setState(data.results || []); // Update state with fetched results
       } catch (err) {
         console.error("Fetch failed:", err);
         setError("Failed to load TvSeries. Please try again later.");
       }
     };
 
+    // Fetch different categories of TV series
     fetchTvSeries(`${API_URL}3/trending/tv/day?language=en-US`, setTvSeries);
     fetchTvSeries(
       `${API_URL}3/tv/top_rated?language=en-US&page=1`,
@@ -43,8 +46,10 @@ const TvSeriesListing = () => {
     );
   }, []);
 
+  // load more items function (add 8 more items on each click)
   const loadMore = () => setVisibleCount((prev) => prev + 8);
 
+  // Component for displaying TV series in a grid format
   const SeriesGrid = ({ name, TvSeries }) => (
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
       <h2 className="text-2xl font-bold tracking-tight text-gray-900">
@@ -59,16 +64,19 @@ const TvSeriesListing = () => {
           ))}
         </div>
       )}
+      {/* Show 'Load More' button if there are more items to display */}
       {visibleCount < TvSeries.length && <LoadMore handleClick={loadMore} />}
     </div>
   );
 
+  // Display error message if fetching fails
   if (error) {
     return <div className="text-red-500 text-center">{error}</div>;
   }
 
   return (
     <div className="bg-white">
+      {/* Loop through different TV series categories and render them */}
       {[TvSeries, TopRatedTvSeries, RecommendedTvSeries].map(
         (seriesSet, id) => (
           <div key={id} className={id % 2 === 0 ? "bg-white" : "bg-gray-100"}>

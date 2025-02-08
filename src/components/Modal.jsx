@@ -7,41 +7,41 @@ export default function Modal({ closeModal, onSignIn }) {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const validatePassword = (password) => {
+  const validatePassword = (password) => { // Checks for special signs in passowrd (required)
     const passwordRegex =
-      /^(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+      /^(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/; 
     return passwordRegex.test(password);
   };
 
-  const validateEmail = (email) => {
+  const validateEmail = (email) => { // Checks if email contins @
     return email.includes("@");
   };
 
-  const handleSignIn = (e) => {
-    e.preventDefault(); // Prevent form submission
+  const handleSignIn = (e) => { // Handles sign in
+    e.preventDefault(); 
 
-    if (!validateEmail(email)) {
+    if (!validateEmail(email)) { //message in emails doesn't contain @
       setErrorMessage("Email must contain an '@' symbol.");
       return;
     }
 
-    if (!validatePassword(password)) {
+    if (!validatePassword(password)) {  //check for 8 letter password
       setErrorMessage(
         "Password must be at least 8 characters long and contain at least one special character."
       );
       return;
     }
 
-    // Clear error message
+    // Clears error message
     setErrorMessage("");
 
-    // Save user data to local storage
+    // Saves user data to local storage
     localStorage.setItem("user", JSON.stringify({ email, password }));
     alert("Signed in successfully!");
     if (onSignIn) {
       onSignIn(email); // Pass the email inital back to the Navbar
     }
-    closeModal(); // Close the modal
+    closeModal();
   };
 
   return (

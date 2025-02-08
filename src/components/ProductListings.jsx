@@ -9,6 +9,7 @@ const ProductListings = () => {
   const [visibleCount, setVisibleCount] = useState(8);
   const [error, setError] = useState(null);
 
+  // Fetch trending movies when the component mounts
   useEffect(() => {
     const options = {
       method: "GET",
@@ -18,6 +19,7 @@ const ProductListings = () => {
       },
     };
 
+    // Fetch trending movies from the API
     fetch(`${API_URL}/3/trending/all/week?language=en-US`, options)
       .then((res) => {
         if (!res.ok) {
@@ -26,20 +28,23 @@ const ProductListings = () => {
         return res.json();
       })
       .then((data) => {
-        setMovies(data.results || []);
+        setMovies(data.results || []); // Store the movie list in state
       })
       .catch((err) => {
         console.error(err);
-        setError("Failed to load movies. Please try again later.");
+        setError("Failed to load movies. Please try again later."); // Handle fetch error
       });
-  }, []);
+  }, []); // Empty dependency array ensures this effect runs only once
 
+  // Function to load more movies by 8 onclick
   const loadMore = () => {
     setVisibleCount((prevCount) => prevCount + 8);
   };
 
+  // Get movies that should be displayed
   const visibleMovies = movies.slice(0, visibleCount);
 
+  // Display error message if an error occurs
   if (error) {
     return <div className="text-red-500 text-center">{error}</div>;
   }
@@ -51,6 +56,7 @@ const ProductListings = () => {
           Currently Trending
         </h2>
 
+        {/* Show loading message if movies are not yet available */}
         {movies.length === 0 ? (
           <div className="text-center text-gray-600">Loading movies...</div>
         ) : (
@@ -60,6 +66,7 @@ const ProductListings = () => {
             ))}
           </div>
         )}
+        {/* Show Load More button if there are more movies to display */}
         {visibleCount < movies.length && <LoadMore handleClick={loadMore} />}
       </div>
     </div>

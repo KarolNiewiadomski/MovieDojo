@@ -1,51 +1,59 @@
-import { useWatchList } from "./UseWatchList"; // custom hook
+import { useWatchList } from "./UseWatchList";
 import { useState } from "react";
 import StarRating from "./StarRating";
 
+// Remove from watchlist
 const WatchList = () => {
   const { watchList, removeFromWatchList: removeFromWatchListFromHook } =
-    useWatchList(); //remove from watchlist
+    useWatchList();
 
+  // Setting order to the list with rating
   const [orderedList, setOrderedList] = useState(
-    watchList.map((movie) => ({ ...movie, rating: 0 })) //setting order to the list
+    watchList.map((movie) => ({ ...movie, rating: 0 }))
   );
-  const [draggedItemIndex, setDraggedItemIndex] = useState(null); //Start of allowing the items to be dragged
 
+  const [draggedItemIndex, setDraggedItemIndex] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
 
+  //Start of allowing the items to be dragged
   const handleDragStart = (index, event) => {
     setDraggedItemIndex(index);
-    event.dataTransfer.effectAllowed = "move"; // Set move effect
+    event.dataTransfer.effectAllowed = "move";
   };
 
+  //Rearranges items while dragging
   const handleDragOver = (index) => {
     if (draggedItemIndex === null || draggedItemIndex === index) return;
 
     const updatedList = [...orderedList];
     const draggedItem = updatedList[draggedItemIndex];
-    updatedList.splice(draggedItemIndex, 1);
-    updatedList.splice(index, 0, draggedItem);
+    updatedList.splice(draggedItemIndex, 1); // Remove dragged item
+    updatedList.splice(index, 0, draggedItem); // Insert at new index
 
     setDraggedItemIndex(index);
     setOrderedList(updatedList);
   };
 
+  // Resets dragged item index after dropping
   const handleDragEnd = () => {
     setDraggedItemIndex(null);
-  }; // End of allowing the items to be dragged
+  };
 
+  // Enables rating of movies inside of watchlist
   const handleRateMovie = (id, rating) => {
     setOrderedList((prevList) =>
       prevList.map((movie) => (movie.id === id ? { ...movie, rating } : movie))
     );
   };
 
+  // Responsible for selecting the correct movie to be romved
   const confirmRemoveFromWatchList = (id) => {
     setSelectedMovieId(id);
     setIsModalOpen(true);
   };
 
+  // Removes a movie from the watchlist
   const removeFromWatchList = () => {
     setOrderedList((prevList) =>
       prevList.filter((movie) => movie.id !== selectedMovieId)
@@ -62,6 +70,7 @@ const WatchList = () => {
           Your Watchlist
         </h2>
 
+        {/* Display message if watchlist is empty */}
         {orderedList.length === 0 ? (
           <p className="text-center text-gray-500">Your Watchlist is empty.</p>
         ) : (
@@ -89,6 +98,7 @@ const WatchList = () => {
                     zIndex: draggedItemIndex === index ? 20 : 1,
                   }}
                 >
+                  {/* Drag handle icon */}
                   <div className="col-span-12 lg:col-span-1 flex items-center justify-center">
                     <div
                       className="drag-handle hover:cursor-grab"
@@ -110,6 +120,8 @@ const WatchList = () => {
                       </svg>
                     </div>
                   </div>
+
+                  {/* Movie Poster */}
                   <div className="col-span-12 lg:col-span-2 img box">
                     <img
                       src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -117,15 +129,20 @@ const WatchList = () => {
                       className="max-lg:w-full lg:w-[180px] rounded-lg object-cover"
                     />
                   </div>
+
+                  {/* Movie Details and Rating */}
                   <div className="col-span-12 lg:col-span-9 detail w-full lg:pl-3">
                     <div className="flex items-center justify-between w-full mb-4">
                       <h5 className="font-manrope font-bold text-2xl leading-9 text-gray-900">
                         {movie.title || movie.name}
                       </h5>
+
+                      {/* Remove movie button */}
                       <button
                         className="rounded-full group flex items-center justify-center focus-within:outline-red-500"
                         onClick={() => confirmRemoveFromWatchList(movie.id)}
                       >
+                        {/* Trash Icon */}
                         <svg
                           width="34"
                           height="34"
@@ -164,7 +181,7 @@ const WatchList = () => {
         )}
       </div>
 
-      {/* Modal */}
+      {/* Modal for movie removal  */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg text-center">

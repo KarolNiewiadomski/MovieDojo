@@ -8,7 +8,7 @@ import { useWatchList } from "./UseWatchList"; // Import custom hook for watchli
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userEmail, setUserEmail] = useState(null); // State to hold the signed-in user's email inital
-  const { watchList } = useWatchList(); // hook to access the watchlist
+  const { watchList } = useWatchList(); // Hook to access the watchlist
 
   const linkClass = ({ isActive }) =>
     isActive

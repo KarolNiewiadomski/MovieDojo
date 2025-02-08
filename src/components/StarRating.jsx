@@ -12,12 +12,12 @@ const StarRating = ({ rating, onRate }) => {
   return (
     <div className="text-lg flex space-x-1">
       {Array(5)
-        .fill(0)
+        .fill(0) // Fill an array with 5 empty elements
         .map((_, index) => (
           <FaStar
             key={index}
             icon={index < rating ? faSolidStar : faLightStar}
-            onClick={() => handleStarClick(index)}
+            onClick={() => handleStarClick(index)} // Set the new rating when clicked
             className={` text-9xl cursor-pointer  text-lg ${
               index < rating ? "text-yellow-400" : "text-gray-300"
             }`}

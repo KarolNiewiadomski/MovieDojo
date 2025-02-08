@@ -11,6 +11,7 @@ const MovieListings = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // API End point
     const options = {
       method: "GET",
       headers: {
@@ -20,6 +21,7 @@ const MovieListings = () => {
     };
 
     const fetchMovies = async (url, setState) => {
+      // API Fetch
       try {
         const res = await fetch(url, options);
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
@@ -38,9 +40,11 @@ const MovieListings = () => {
     );
   }, []);
 
-  const loadMore = () => setVisibleCount((prev) => prev + 8);
+  const loadMore = () => setVisibleCount((prev) => prev + 8); // handles loadmore button on click
 
-  const MovieGrid = ({ title, movies }) => (
+  const MovieGrid = (
+    { title, movies } // movie grid
+  ) => (
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
       <h2 className="text-2xl font-bold tracking-tight text-gray-900">
         {title}
@@ -59,6 +63,7 @@ const MovieListings = () => {
   );
 
   if (error) {
+    // Error Div
     return <div className="text-red-500 text-center">{error}</div>;
   }
 

@@ -1,18 +1,20 @@
 /* eslint-disable react/prop-types */
-import { FaStar } from "react-icons/fa";
-import { useWatchList } from "./UseWatchList";
+import { FaStar } from "react-icons/fa"; // Import star icon for ratings
+import { useWatchList } from "./UseWatchList"; // Custom hook for watchlist context
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"; // For animation effects
 
 const ProductListing = ({ movie }) => {
-  const { addToWatchList } = useWatchList();
-  const [isHovered, setIsHovered] = useState(false);
+  const { addToWatchList } = useWatchList(); // Add a movie to the watchlist
+  const [isHovered, setIsHovered] = useState(false); // Track hover status
 
+  // Add movie to watchlist
   const handleAddToWatchList = () => {
     addToWatchList(movie);
-    alert("Succesfully added to watchlist");
+    alert("Successfully added to watchlist");
   };
 
+  // Renders Button
   const renderButton = () => (
     <button
       className="flex items-center justify-between rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm bg-indigo-600 hover:bg-indigo-500"
@@ -22,6 +24,7 @@ const ProductListing = ({ movie }) => {
     </button>
   );
 
+  // Error message
   if (!movie) {
     return <div className="text-white">Movie data is unavailable.</div>;
   }
@@ -46,7 +49,7 @@ const ProductListing = ({ movie }) => {
           </div>
         )}
 
-        {/* Animated Overview */}
+        {/* Animated Overview (appears when hovered) */}
         <motion.div
           initial={{ y: "100%", opacity: 0 }}
           animate={isHovered ? { y: 0, opacity: 1 } : { y: "100%", opacity: 0 }}
@@ -57,7 +60,7 @@ const ProductListing = ({ movie }) => {
         </motion.div>
       </div>
 
-      {/* Movie Info */}
+      {/* Movie Info (Title, Rating, and Button) */}
       <div className="p-4 flex-grow flex flex-col justify-between">
         <h3 className="text-base font-bold text-white">
           {movie.title || movie.name || "Untitled"}
